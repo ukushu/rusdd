@@ -15,9 +15,9 @@
 
 <script>
 var fs = require("fs");
-var text = fs.readFileSync("./sites.txt");
+var text = fs.readFileSync("sites.txt");
   
-var targets = text.split("\n").filter( e => e.charAt(0) != "/" );
+var targets = text.split("\n");//.filter( e => e.charAt(0) != "/" );
 
 var targetStats = {}
 targets.forEach((target) => {
